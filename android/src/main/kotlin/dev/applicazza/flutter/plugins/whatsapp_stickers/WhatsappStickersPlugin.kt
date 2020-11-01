@@ -27,10 +27,10 @@ public class WhatsappStickersPlugin: FlutterPlugin, MethodCallHandler, ActivityA
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
   private lateinit var channel : MethodChannel
-  private var context: Context? = null
   private var stickerPackList: List<StickerPack>? = null
-  private var activity: Activity? = null
   private var result: Result? = null
+  private lateinit var context: Context
+  private lateinit var activity: Activity
   val ADD_PACK = 200
 
   private val EXTRA_STICKER_PACK_ID = "sticker_pack_id"
@@ -73,7 +73,7 @@ public class WhatsappStickersPlugin: FlutterPlugin, MethodCallHandler, ActivityA
     fun getContentProviderAuthority(context: Context): String {
       return context.packageName + ".stickercontentprovider"
     }
-    
+
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -140,19 +140,16 @@ public class WhatsappStickersPlugin: FlutterPlugin, MethodCallHandler, ActivityA
   }
 
   override fun onDetachedFromActivity() {
-    TODO("Not yet implemented")
   }
 
   override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-    TODO("Not yet implemented")
   }
 
   override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-    this.activity = binding.activity
+    this.activity = binding.activity;
   }
 
   override fun onDetachedFromActivityForConfigChanges() {
-    TODO("Not yet implemented")
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
